@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :authentication_keys => [:login]
 
+  has_one :profile, dependent: :destroy #ユーザーは１つのプロフィールを持つ
+
   attr_accessor :login
 
   validates :username,

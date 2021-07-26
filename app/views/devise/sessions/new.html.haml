@@ -1,0 +1,20 @@
+.container
+  .login-form-img
+    = image_tag 'login-img.png'
+  %h2 Log in
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    %p
+      = f.label :login, "ユーザー名orメールアドレス"
+      %br/
+      = f.text_field :login
+    .field
+      = f.label :password
+      %br/
+      = f.password_field :password, autocomplete: "current-password"
+    - if devise_mapping.rememberable?
+      .field.check_box
+        = f.check_box :remember_me
+        = f.label :remember_me
+    .actions
+      = f.submit "Log in", class: "btn-primary"
+  = render "devise/shared/links"

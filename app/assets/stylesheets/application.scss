@@ -1,6 +1,9 @@
 @import 'variables';
 @import 'form';
 @import 'buttons';
+@import 'header';
+@import 'commons';
+@import 'profile';
 
 
 html {
@@ -24,6 +27,7 @@ body {
   background-color: $base-bg-color;
   font-size: 1em;
   color: $text-base-color;
+  margin: 0;
 }
 
 .container {

@@ -1,3 +1,47 @@
-// Place all the styles related to the Profiles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+@import './variables';
+
+.profile {
+    text-align: center;
+    &_avatar {
+        margin: 30px 0;
+        img {
+            width: $avatar-size + 70;
+            height: $avatar-size + 70;
+            border-radius: 100%;
+        }
+    }
+    &_info {
+        display: flex;
+        justify-content: center;
+        div {
+            width: 20%;
+        }
+        &_num {
+            font-weight: 600;
+            font-size: $font-md;
+            margin-bottom: 5px;
+        }
+        &_text {
+            margin-top: 5px;
+            font-size: $font-sm - 2;
+        }
+    }
+    &_contents {
+        width: 100%;
+        margin-top: 30px;
+        .photos {
+            width: 100%;
+            line-height: 0;
+            -webkit-column-count: 2;
+            -webkit-column-gap:   0px;
+            -moz-column-count:    2;
+            -moz-column-gap:      0px;
+            column-count:         2;
+            column-gap:           5px;
+            img {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+    }
+}

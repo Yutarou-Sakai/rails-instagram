@@ -1,1 +1,23 @@
-.container 
+.container.profile
+    .profile_avatar 
+        = image_tag "no-img-avatar.jpg", class: "profile-avatar-img"
+    .profile_info 
+        .profile_info_posts
+            %p.profile_info_num 44
+            %p.profile_info_text Posts
+        .profile_info_followers
+            %p.profile_info_num 44
+            %p.profile_info_text Followers
+        .profile_info_following
+            %p.profile_info_num 44
+            %p.profile_info_text Followings
+    .profile_contents
+        .photos
+            = image_tag "photo1.png"
+            = image_tag "photo2.png"
+            = image_tag "photo3.png"
+            = image_tag "photo4.png"
+            = image_tag "photo5.png"
+            = image_tag "photo3.png"
+            = image_tag "photo1.png"
+            = image_tag "photo2.png"

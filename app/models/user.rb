@@ -22,4 +22,12 @@ class User < ApplicationRecord
       where(conditions).first
     end
   end
+
+  def avatar_image #アバターがあればそれを、なければno-img-avatar.jpgを返す
+    if profile&.avatar&.attached?
+      profile.avatar
+    else
+      'no-img-avatar.jpg'
+    end
+  end
 end

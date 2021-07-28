@@ -23,6 +23,10 @@ class User < ApplicationRecord
     end
   end
 
+  def prepare_profile #プロフィールの情報があればそれを、なければ空を渡す
+    profile || build_profile
+  end
+
   def avatar_image #アバターがあればそれを、なければno-img-avatar.jpgを返す
     if profile&.avatar&.attached?
       profile.avatar

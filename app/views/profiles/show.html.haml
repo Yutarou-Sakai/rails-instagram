@@ -1,6 +1,8 @@
 .container.profile
     .profile_avatar 
-        = image_tag "no-img-avatar.jpg", class: "profile-avatar-img"
+        -# = image_tag "no-img-avatar.jpg", class: "profile-avatar-img"
+        = image_tag current_user.avatar_image, class: "profile-avatar-img" #user.rb でアバターがあるか判定してる
+        = link_to '編集', edit_profile_path
     .profile_info 
         .profile_info_posts
             %p.profile_info_num 44

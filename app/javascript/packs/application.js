@@ -21,10 +21,6 @@ ActiveStorage.start()
 
 
 // アバターの処理
-// const appendNewAvatar = (avatar) => {
-//   $('.profile-avatar-img').attr('src', avatar)
-// }
-
 document.addEventListener('DOMContentLoaded', () => {
   $(function(){
       $('.profile-avatar-img').on('click', function(){
@@ -32,13 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       $('.profile-avatar-img').on("load", function() {
-        axios.put(`profile`, {
-          avatar: { profile: avatar }
-        })
-          .then((res) => {
-            const avatar = res.data
-            // appendNewAvatar(avatar)
-          })
+        $('#upFile').submit()
       });
     });
 });

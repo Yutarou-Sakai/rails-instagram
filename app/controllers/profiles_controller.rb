@@ -11,11 +11,11 @@ class ProfilesController < ApplicationController
 
     def update
         @profile.assign_attributes(profile_params) #@profileに対してパラメータの値を合体できる
-        if @profile.save
+        if @profile.save!
             redirect_to profile_path, notice: 'プロフィールを更新しました'
         else
             flash.now[:error] = '更新できませんでした'
-            render :edit
+            render :show
         end
     end
 

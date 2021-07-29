@@ -14,3 +14,5 @@ import axios from 'axios'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+

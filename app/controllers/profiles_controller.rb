@@ -3,7 +3,8 @@ class ProfilesController < ApplicationController
     before_action :set_profile, only: [:edit, :update]
 
     def show
-        @profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
+        profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
+        render json: profile
     end
 
     def edit

@@ -3,8 +3,7 @@ class ProfilesController < ApplicationController
     before_action :set_profile, only: [:edit, :update]
 
     def show
-        profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
-        render json: profile
+        @profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
     end
 
     def edit
@@ -12,11 +11,11 @@ class ProfilesController < ApplicationController
 
     def update
         @profile.assign_attributes(profile_params) #@profileに対してパラメータの値を合体できる
-        if @profile.save
+        if @profile.save!
             redirect_to profile_path, notice: 'プロフィールを更新しました'
         else
             flash.now[:error] = '更新できませんでした'
-            render :edit
+            render :show
         end
     end
 

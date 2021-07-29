@@ -25,34 +25,33 @@ ActiveStorage.start()
 //   $('.profile-avatar-img').attr('src', avatar)
 // }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   $(function(){
-//       $('.profile-avatar-img').on('click', function(){
-//         $('#upFile').click();
-//       });
+document.addEventListener('DOMContentLoaded', () => {
+  $(function(){
+      $('.profile-avatar-img').on('click', function(){
+        $('#upFile').click();
+      });
 
-//       $('.profile-avatar-img').on("load", function() {
-//         axios.put(`profile`, {
-//           avatar: { profile: avatar_image }
-//         })
-//           .then((res) => {
-//             const avatar = res.data
-//             appendNewAvatar(avatar)
-//             console.log(res)
-//           })
-//       });
-//     });
-// });
+      $('.profile-avatar-img').on("load", function() {
+        axios.put(`profile`, {
+          avatar: { profile: avatar }
+        })
+          .then((res) => {
+            const avatar = res.data
+            // appendNewAvatar(avatar)
+          })
+      });
+    });
+});
 
-// window.addEventListener('load', () => {
-//   const uploader = document.querySelector('.form-avatar');
-//   $(uploader).on('change', (e) => {
-//       const file = uploader.files[0];
-//       const reader = new FileReader();
-//       reader.readAsDataURL(file);
-//       reader.onload = () => {
-//           const image = reader.result;
-//           document.querySelector('.profile-avatar-img').setAttribute('src', image);
-//       }
-//   });
-// });
+window.addEventListener('load', () => {
+  const uploader = document.querySelector('.form-avatar');
+  $(uploader).on('change', (e) => {
+      const file = uploader.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+          const image = reader.result;
+          document.querySelector('.profile-avatar-img').setAttribute('src', image);
+      }
+  });
+});

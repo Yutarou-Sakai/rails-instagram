@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
         respond_to do |format|
             if @profile.update(profile_params)
                 format.html { redirect_to @profile }
-                format.json { render json: { avatar: @profile.avatar } }
+                # format.json { render json: { avatar: @profile.avatar } }
             end
         end
     end

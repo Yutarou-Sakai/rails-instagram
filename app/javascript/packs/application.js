@@ -26,26 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.profile-avatar-img').on('click', function(){
       $('#upFile').click();
     });
-    $('#avatar-btn').on('click', function(){
-      const data = new FormData();
-      data.append("avatar", "avatar");
-      axios.post('profile', data)
-        .then(function (response) {
-          $(this).fadeOut()
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    });
+    // $('#avatar-btn').on('click', function(){
+      // const data = new FormData();
+      // data.append("avatar", "avatar");
+      // axios.post('profile', data)
+      //   .then(function (response) {
+      //     $(this).fadeOut()
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+    // });
   });
 
-  axios.get(`/profile`)
-    .then((response) => {
-
-
-
-    })
   // アップローダーで選んだファイルをプレビュー表示
   const uploader = document.querySelector('.form-avatar');
   $(uploader).on('change', (e) => {

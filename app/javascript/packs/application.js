@@ -23,26 +23,23 @@ ActiveStorage.start()
 // アバターの処理
 document.addEventListener('DOMContentLoaded', () => {
   $(function(){
-      $('.profile-avatar-img').on('click', function(){
-        $('#upFile').click();
-      });
-
-      $('.profile-avatar-img').on("load", function() {
-        $('#avatar-btn').fadeIn()
-      });
+    $('.profile-avatar-img').on('click', function(){
+      $('#upFile').click();
     });
-});
+    $('#avatar-btn').on('click', function(){
+      $(this).fadeOut()
+    });
+  });
 
-window.addEventListener('load', () => {
   const uploader = document.querySelector('.form-avatar');
   $(uploader).on('change', (e) => {
-      const file = uploader.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-          const image = reader.result;
-          document.querySelector('.profile-avatar-img').setAttribute('src', image);
+    $('#avatar-btn').fadeIn()
+    const file = uploader.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        const image = reader.result;
+        document.querySelector('.profile-avatar-img').setAttribute('src', image);
       }
   });
 });
-

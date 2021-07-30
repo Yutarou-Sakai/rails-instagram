@@ -21,38 +21,36 @@ ActiveStorage.start()
 
 
 // アバターの処理
-// const appendNewAvatar = (avatar) => {
-//   $('.profile-avatar-img').attr('src', avatar)
-// }
+document.addEventListener('DOMContentLoaded', () => {
+  $(function(){
+    $('.profile-avatar-img').on('click', function(){
+      $('#upFile').click();
+    });
+    // $('#avatar-btn').on('click', function(){
+      // const data = new FormData();
+      // data.append("avatar", "avatar");
+      // axios.post('profile', data)
+      //   .then(function (response) {
+      //     $(this).fadeOut()
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+    // });
+  });
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   $(function(){
-//       $('.profile-avatar-img').on('click', function(){
-//         $('#upFile').click();
-//       });
+  // アップローダーで選んだファイルをプレビュー表示
+  const uploader = document.querySelector('.form-avatar');
+  $(uploader).on('change', (e) => {
+    $('#avatar-btn').fadeIn()
 
-//       $('.profile-avatar-img').on("load", function() {
-//         axios.put(`profile`, {
-//           avatar: { profile: avatar_image }
-//         })
-//           .then((res) => {
-//             const avatar = res.data
-//             appendNewAvatar(avatar)
-//             console.log(res)
-//           })
-//       });
-//     });
-// });
-
-// window.addEventListener('load', () => {
-//   const uploader = document.querySelector('.form-avatar');
-//   $(uploader).on('change', (e) => {
-//       const file = uploader.files[0];
-//       const reader = new FileReader();
-//       reader.readAsDataURL(file);
-//       reader.onload = () => {
-//           const image = reader.result;
-//           document.querySelector('.profile-avatar-img').setAttribute('src', image);
-//       }
-//   });
-// });
+    const file = uploader.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        const image = reader.result;
+        document.querySelector('.profile-avatar-img').setAttribute('src', image);
+      }
+  });
+});

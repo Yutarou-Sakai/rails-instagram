@@ -19,3 +19,16 @@
     padding: 16px 0;
     font-weight: bold;
 }
+
+.modal-btn-primary {
+    align-items: center;
+    margin: 0 auto;
+    padding: 0.8em 2em;
+    width: 300px;
+    color: $btn-base-color;
+    background-color: $base-bg-color;
+    font-size: $font-sm;
+    font-weight: 700;
+    border: 2px solid $btn-base-color;
+    border-radius: 10px;
+}

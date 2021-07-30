@@ -18,13 +18,17 @@ class ProfilesController < ApplicationController
         #     render :show
         # end
 
-        @profile = current_user.build_profile(profile_params)
+        # @profile = current_user.build_profile(profile_params)
         @profile.assign_attributes(profile_params)
+        # if @profile.save
+        #     render json: url_for(@profile.avatar)
+        # else
+        #     render json: user.errors, status: :bad_request
+        # end
         respond_to do |format|
             if @profile.update(profile_params)
                 format.html { redirect_to @profile }
                 format.json { render json: { avatar: @profile.avatar } }
-                # format.js { flash[:notice] = "プロフィールを更新しました" } 
             end
         end
     end

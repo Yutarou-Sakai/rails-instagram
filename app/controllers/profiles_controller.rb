@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
             if @profile.update(profile_params)
                 format.html { redirect_to @profile }
                 format.json { render json: { avatar: @profile.avatar } }
-                format.js { flash[:notice] = "プロフィールを更新しました" } 
+                # format.js { flash[:notice] = "プロフィールを更新しました" } 
             end
         end
     end

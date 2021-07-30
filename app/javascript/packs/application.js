@@ -27,19 +27,34 @@ document.addEventListener('DOMContentLoaded', () => {
       $('#upFile').click();
     });
     $('#avatar-btn').on('click', function(){
-      $(this).fadeOut()
+      const data = new FormData();
+      data.append("avatar", "avatar");
+      
+      axios.post('profile', data)
+        .then(function (response) {
+          // 送信成功時の処理
+          $(this).fadeOut()
+          console.log(response);
+        })
+        .catch(function (error) {
+          // 送信失敗時の処理
+          console.log(error);
+        });
     });
   });
 
-  const uploader = document.querySelector('.form-avatar');
-  $(uploader).on('change', (e) => {
-    $('#avatar-btn').fadeIn()
-    const file = uploader.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        const image = reader.result;
-        document.querySelector('.profile-avatar-img').setAttribute('src', image);
-      }
-  });
+  axios.get(`/profile`)
+    .then((response) => {
+      const uploader = document.querySelector('.form-avatar');
+      $(uploader).on('change', (e) => {
+        $('#avatar-btn').fadeIn()
+        const file = uploader.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const image = reader.result;
+            document.querySelector('.profile-avatar-img').setAttribute('src', image);
+          }
+      });
+    })
 });

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       $('.profile-avatar-img').on("load", function() {
-        $('#upFile').submit()
+        $('#avatar-btn').fadeIn()
       });
     });
 });
@@ -45,3 +45,4 @@ window.addEventListener('load', () => {
       }
   });
 });
+

@@ -4,7 +4,7 @@
         = form_with(model: @profile, url: profile_path, method: 'PUT', id: 'profile_form', remote: true) do |f|
             %div 
                 = f.file_field :avatar, style:"display:none;", id: 'upFile', class: 'form-avatar'
-            =f.submit 'Submit', class: 'modal-btn-primary', id: 'avatar-btn'
+            =f.submit '変更', class: 'modal-btn-primary hidden', id: 'avatar-btn'
     .profile_info 
         .profile_info_posts
             %p.profile_info_num 44

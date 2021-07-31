@@ -4,19 +4,27 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import $ from 'jquery'
-import axios from 'axios'
-import { csrfToken } from "rails-ujs";
+
+// import $ from 'jquery'
+const { default: axios } = require("axios");
+var jQuery = require('jquery')
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
+// import axios from 'axios'
+import { csrfToken } from "rails-ujs"
 
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()
+
+require("./slick")
 
 
 
@@ -26,18 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.profile-avatar-img').on('click', function(){
       $('#upFile').click();
     });
-    // $('#avatar-btn').on('click', function(){
-      // const data = new FormData();
-      // data.append("avatar", "avatar");
-      // axios.post('profile', data)
-      //   .then(function (response) {
-      //     $(this).fadeOut()
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
-    // });
   });
 
   // アップローダーで選んだファイルをプレビュー表示
@@ -53,4 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.profile-avatar-img').setAttribute('src', image);
       }
   });
+});
+
+$(function() {
+  console.log("OK");
 });

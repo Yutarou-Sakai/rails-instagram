@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
+    before_action :set_post, only: [:show]
     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
     def index
         @posts = Post.all
     end 
+
+    def show # id を取得して投稿情報を表示
+    end
 
     def new
         @post = current_user.posts.build
@@ -22,10 +26,10 @@ class PostsController < ApplicationController
 
     private
     def post_params #フォームの入力内容
-        params.require(:post).permit(:content, :content_images)
+        params.require(:post).permit(:content, content_images: [])
     end
 
-    def set_article
+    def set_post
         @post = Post.find(params[:id])
     end
 end

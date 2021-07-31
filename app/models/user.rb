@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :authentication_keys => [:login]
 
   has_one :profile, dependent: :destroy #ユーザーは１つのプロフィールを持つ
+  has_many :posts, dependent: :destroy #ユーザーは複数の投稿を持つ
 
   attr_accessor :login
 

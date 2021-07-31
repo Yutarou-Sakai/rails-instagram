@@ -1,0 +1,14 @@
+.container
+  %ul
+    - @post.errors.full_messages.each do |message|
+      %li= message
+  = form_with(model: @post, local: true) do |f|
+    %div 
+      = f.label :content_images, '写真'
+    %div
+      = f.file_field :content_images, multiple: true
+    %div
+      = f.label :content, '本文'
+    %div
+      = f.text_area :content
+    = f.submit '保存', class: 'btn-primary'

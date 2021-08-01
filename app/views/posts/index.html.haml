@@ -17,4 +17,4 @@
                     = image_tag "comment.svg", class: "content_icon_comment post_icon"
                     = image_tag "share.svg", class: "content_icon_share post_icon"
                 .content_body 
-                    %p= post.content
+                    %p= simple_format(post.content)

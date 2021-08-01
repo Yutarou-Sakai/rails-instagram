@@ -32,7 +32,7 @@ class User < ApplicationRecord
     if profile&.avatar&.attached?
       profile.avatar
     else
-      'no-img-avatar.jpg'
+      'no-img-avatar.png'
     end
   end
 end

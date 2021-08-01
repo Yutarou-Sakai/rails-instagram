@@ -4,7 +4,8 @@
             .post_content
                 .content_info
                     .content_info_image
-                        = image_tag "avatar.png", class: "content_info_avatar"
+                        = image_tag post.user.avatar_image, class: "content_info_avatar"
+                        -# = image_tag "avatar.png", class: "content_info_avatar"
                     .content_info_text 
                         %p.text_name name
                         %P.text_day 2021/08/01

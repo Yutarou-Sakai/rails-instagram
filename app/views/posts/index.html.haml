@@ -2,9 +2,19 @@
     .post_contents
         - @posts.each do |post|
             .post_content
-                .content_images
+                .content_info
+                    .content_info_image
+                        = image_tag "avatar.png", class: "content_info_avatar"
+                    .content_info_text 
+                        %p.text_name name
+                        %P.text_day 2021/08/01
+                .content_images.slider
                     - if post.content_images.attached?
                         - post.content_images.each do |image|
                             = image_tag image
+                .content_icon 
+                    = image_tag "heart.svg", class: "content_icon_heart post_icon"
+                    = image_tag "comment.svg", class: "content_icon_comment post_icon"
+                    = image_tag "share.svg", class: "content_icon_share post_icon"
                 .content_body 
-                    = post.content
+                    %p= simple_format(post.content)

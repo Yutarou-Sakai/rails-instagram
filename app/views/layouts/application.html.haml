@@ -7,15 +7,20 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    %link{href: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css", rel: "stylesheet", type: "text/css"}/
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{src: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js", type: "text/javascript"}
   %body
     %header.header
       .header_logos
         - if !current_page?(root_path)
           = link_to :back do
             = image_tag 'back.svg', class: 'header_back'
-        %p.header_pageTitle
-          = link_to 'rails instagram', root_path
+          %p.header_pageTitle
+            = link_to 'rails instagram', root_path
+        - else
+          = link_to new_post_path do
+            = image_tag 'camera.svg', class: 'header_new'
       - if user_signed_in?
         .dropdown
           = image_tag current_user.avatar_image, class: "profile-avatar-img header_avatar dropbtn"

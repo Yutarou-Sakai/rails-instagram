@@ -1,2 +1,41 @@
 @import './variables';
 
+.post_content {
+    border: solid 1px #888;
+    padding: 10px;
+    margin: 20px auto;
+    .content_info {
+        display: flex;
+        align-items: center;
+        &_avatar {
+            width: $avatar-size + 10;
+            height: $avatar-size + 10;
+            border-radius: 100%;
+        }
+        &_text {
+            margin-left: 5px;
+            p {
+                margin: 0;
+            }
+        }
+        .text_name {
+            font-weight: 600;
+            font-size: $font-sm;
+        }
+        .text_day {
+            font-size: $font-sm - 3;
+        }
+    }
+    .content_icon {
+        display: flex;
+        .post_icon {
+            width: 24px;
+            margin:10px 20px 0 0;
+        }
+    }
+    .content_body {
+        p {
+            font-size: $font-md;
+        }
+    }
+}

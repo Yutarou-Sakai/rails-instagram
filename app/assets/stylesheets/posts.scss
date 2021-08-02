@@ -1,7 +1,7 @@
 @import './variables';
 
 .post_content {
-    border: solid 1px #888;
+    border: solid 1.5px rgb(204, 204, 204);
     padding: 10px;
     margin: 20px auto;
     .content_info {
@@ -26,11 +26,14 @@
             font-size: $font-sm - 3;
         }
     }
+    .content_images {
+        margin-bottom: 10px!important;
+    }
     .content_icon {
         display: flex;
         .post_icon {
             width: 24px;
-            margin:10px 20px 0 0;
+            margin: 0 20px 0 0;
         }
     }
     .content_body {

@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy #ユーザーは１つのプロフィールを持つ
   has_many :posts, dependent: :destroy #ユーザーは複数の投稿を持つ
+  has_many :likes, dependent: :destroy #投稿は複数のいいねを持つ
 
   attr_accessor :login
 
@@ -14,6 +15,10 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: :false }, #一意のusernameで大小文字を区別しない
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
+
+  def has_liked?(post)
+    likes.exists?(post_id: post.id)
+  end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

@@ -4,32 +4,76 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-
-// import $ from 'jquery'
-const { default: axios } = require("axios");
 var jQuery = require('jquery')
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
-// import axios from 'axios'
+import axios from 'axios'
 import { csrfToken } from "rails-ujs"
 
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 
 Rails.start()
-// Turbolinks.start()
 ActiveStorage.start()
 
 require("./slick")
 
 
 
-// アバターの処理
+
+// 「いいね」されていないハートをクリックすると「いいね」される
+const listenInactiveHeartEvent = (postId) => {
+  $('#inactive-heart').on('click', () => {
+    axios.post(`/posts/${postId}/like`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('#active-heart').removeClass('hidden')
+          $('#inactive-heart').addClass('hidden')
+        }
+      })
+      .catch((e) => {
+        window.alert('Error')
+        console.log(e)
+      })
+  })
+}
+
+// 「いいね」されているハートをクリックすると「いいね」が解除される
+const listenActiveHeartEvent = (postId) => {
+  $('#active-heart').on('click', () => {
+    axios.delete(`/posts/${postId}/like`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('#active-heart').addClass('hidden')
+          $('#inactive-heart').removeClass('hidden')
+        }
+      })
+      .catch((e) => {
+        window.alert('Error')
+        console.log(e)
+      })
+  })
+}
+
+// いいねされてるか確認して、表示を判定
+const handleHeartDisplay = (hasLiked) => {
+  if (hasLiked) {
+    $('#active-heart').removeClass('hidden')
+  } else {
+    $('#inactive-heart').removeClass('hidden')
+  }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
+  const dataset = $('#post-show').data()
+  const postId = dataset.postId
+  console.log(postId)
+
   $(function(){
     $('.profile-avatar-img').on('click', function(){
       $('#upFile').click();
@@ -49,8 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.profile-avatar-img').setAttribute('src', image);
       }
   });
+
+
+  // いいね機能の実装
+  axios.get(`/posts/${postId}/like`)
+    .then((response) => {
+      const hasLiked = response.data.hasLiked
+      handleHeartDisplay(hasLiked)
+    })
+    .catch((e) => {
+      window.alert('Error')
+      console.log(e)
+    })
+
+    listenInactiveHeartEvent(postId)
+    listenActiveHeartEvent(postId)
 });
 
-$(function() {
-  console.log("OK");
-});

@@ -1,24 +1,23 @@
 .container
     .post_contents
         - @posts.each do |post|
-            = link_to post_path(post) do
-                .post_content#post-show{data: {post_id: post.id}}
-                    .content_info
-                        .content_info_image
-                            = image_tag post.user.avatar_image, class: "content_info_avatar"
-                        .content_info_text 
-                            %p.text_name= post.user.username
-                            %P.text_day= post.created_at.to_s(:datetime_jp)
-                    .content_images.slider
-                        - if post.content_images.attached?
-                            - post.content_images.each do |image|
-                                = image_tag image
-                    .content_icon 
-                        - if user_signed_in?
-                            = image_tag 'heart-active.svg', class: "article_heart content_icon_comment post_icon hidden", id: "active-heart"
-                            = image_tag 'heart.svg', class: "article_heart content_icon_comment post_icon hidden", id: "inactive-heart"
-                        = image_tag "comment.svg", class: "content_icon_comment post_icon"
-                        = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
-                            = image_tag "share.svg", class: "content_icon_share post_icon"
-                    .content_body 
-                        %p= simple_format(post.content)
+            .post_content#post-show{data: {post_id: post.id}}
+                .content_info
+                    .content_info_image
+                        = image_tag post.user.avatar_image, class: "content_info_avatar"
+                    .content_info_text 
+                        %p.text_name= post.user.username
+                        %P.text_day= post.created_at.to_s(:datetime_jp)
+                .content_images.slider
+                    - if post.content_images.attached?
+                        - post.content_images.each do |image|
+                            = image_tag image
+                .content_icon 
+                    - if user_signed_in?
+                        = image_tag 'heart-active.svg', class: "article_heart content_icon_comment post_icon hidden", id: "active-heart"
+                        = image_tag 'heart.svg', class: "article_heart content_icon_comment post_icon hidden", id: "inactive-heart"
+                    = image_tag "comment.svg", class: "content_icon_comment post_icon"
+                    = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
+                        = image_tag "share.svg", class: "content_icon_share post_icon"
+                .content_body 
+                    %p= simple_format(post.content)

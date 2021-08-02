@@ -7,11 +7,11 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-const { default: axios } = require("axios");
 var jQuery = require('jquery')
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
+import axios from 'axios'
 import { csrfToken } from "rails-ujs"
 
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
@@ -20,6 +20,8 @@ Rails.start()
 ActiveStorage.start()
 
 require("./slick")
+
+
 
 
 // 「いいね」されていないハートをクリックすると「いいね」される
@@ -59,15 +61,19 @@ const listenActiveHeartEvent = (postId) => {
 // いいねされてるか確認して、表示を判定
 const handleHeartDisplay = (hasLiked) => {
   if (hasLiked) {
-      $('#active-heart').removeClass('hidden')
+    $('#active-heart').removeClass('hidden')
   } else {
-      $('#inactive-heart').removeClass('hidden')
+    $('#inactive-heart').removeClass('hidden')
   }
 }
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  const dataset = $('#post-show').data()
+  const postId = dataset.postId
+  console.log(postId)
+
   $(function(){
     $('.profile-avatar-img').on('click', function(){
       $('#upFile').click();
@@ -94,6 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((response) => {
       const hasLiked = response.data.hasLiked
       handleHeartDisplay(hasLiked)
+    })
+    .catch((e) => {
+      window.alert('Error')
+      console.log(e)
     })
 
     listenInactiveHeartEvent(postId)

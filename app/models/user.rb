@@ -16,6 +16,10 @@ class User < ApplicationRecord
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
 
+  def has_liked?(post)
+    likes.exists?(post_id: post.id)
+  end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

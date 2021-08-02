@@ -15,6 +15,7 @@
                 .content_icon 
                     = image_tag "heart.svg", class: "content_icon_heart post_icon"
                     = image_tag "comment.svg", class: "content_icon_comment post_icon"
-                    = image_tag "share.svg", class: "content_icon_share post_icon"
+                    = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
+                        = image_tag "share.svg", class: "content_icon_share post_icon"
                 .content_body 
                     %p= simple_format(post.content)

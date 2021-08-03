@@ -1,8 +1,8 @@
 .container
-    .comment_list
-        %p commentのindexだよ
-        %p commentのindexだよ
-        %p commentのindexだよ
+    %h2 コメント一覧
+    - @comments.each do |comment|
+        .comment_list
+            %p= comment.content
     = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
         %div
             = f.label :content, 'コメント'

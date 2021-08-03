@@ -1,17 +1,18 @@
 class CommentsController < ApplicationController
-    def index
-        @comments = Comment.all
+    before_action :set_post, only: [:index, :create]
+    before_action :set_comments, only: [:index, :create]
 
-        post = Post.find(params[:post_id])
-        @comment = post.comments.build
+
+    def index
+        @comment = @post.comments.build
     end
 
     def create
-        post = Post.find(params[:post_id])
-        @comment = post.comments.build(comment_params)
+        @comment = @post.comments.build(comment_params)
         @comment.user = current_user
         if @comment.save
-            redirect_to post_comments_path(post), notice: 'コメントを追加しました'
+            redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
+            @comment.content = ''
         else
             flash.now[:error] = '追加できませんでした'
             render :index
@@ -25,5 +26,13 @@ class CommentsController < ApplicationController
     private
     def comment_params
         params.require(:comment).permit(:content)
+    end
+
+    def set_post
+        @post = Post.find(params[:post_id])
+    end
+
+    def set_comments
+        @comments = Comment.where(post_id: @post.id)
     end
 end

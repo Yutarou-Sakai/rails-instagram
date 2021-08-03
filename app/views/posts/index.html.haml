@@ -4,7 +4,7 @@
             .post_content
                 .content_info
                     .content_info_image
-                        = image_tag post.user.avatar_image, class: "content_info_avatar"
+                        = image_tag post.user.avatar_image, class: "avatar"
                     .content_info_text 
                         %p.text_name= post.user.username
                         %P.text_day= post.created_at.to_s(:datetime_jp)

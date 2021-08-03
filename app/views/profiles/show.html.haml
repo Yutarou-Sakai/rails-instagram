@@ -2,7 +2,7 @@
     .profile_name 
         %p= @user_name
     .profile_avatar 
-        = image_tag current_user.avatar_image, class: "profile-avatar-img"
+        = image_tag current_user.avatar_image, class: "avatar"
         = form_with(model: @profile, url: profile_path, method: 'PUT', id: 'profile_form', remote: true) do |f|
             %div 
                 = f.file_field :avatar, style:"display:none;", id: 'upFile', class: 'form-avatar'

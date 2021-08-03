@@ -2,14 +2,6 @@
 
 .profile {
     text-align: center;
-    &_avatar {
-        margin: 30px 0;
-        img {
-            width: $avatar-size + 70;
-            height: $avatar-size + 70;
-            border-radius: 100%;
-        }
-    }
     &_info {
         display: flex;
         justify-content: center;

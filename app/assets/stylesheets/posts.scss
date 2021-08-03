@@ -7,11 +7,6 @@
     .content_info {
         display: flex;
         align-items: center;
-        &_avatar {
-            width: $avatar-size + 10;
-            height: $avatar-size + 10;
-            border-radius: 100%;
-        }
         &_text {
             margin-left: 5px;
             p {

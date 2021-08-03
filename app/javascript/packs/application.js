@@ -23,67 +23,69 @@ require("./slick")
 
 
 
+// いいねされてるか確認して判定
+const handleHeartDisplay = (hasLiked, postId) => {
+  if (hasLiked) {
+    $('#' + postId + '.active-heart').removeClass('hidden')
+  } else {
+    $('#' + postId + '.inactive-heart').removeClass('hidden')
+  }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  $('.active-heart').each(function() {
-    const postId = $(this).attr('id')
-    // console.log(postId)
-
-    // いいねされてるか確認して判定
-    const handleHeartDisplay = (hasLiked) => {
-      if (hasLiked) {
-        $('#' + postId + '.active-heart').removeClass('hidden')
-      } else {
-        $('#' + postId + '.inactive-heart').removeClass('hidden')
-      }
-    }
-
-    // いいね判定をもとに、いいねを表示
-    axios.get(`/posts/${postId}/like`)
-    .then((response) => {
-      const hasLiked = response.data.hasLiked
-      handleHeartDisplay(hasLiked)
-    })
-    .catch((e) => {
-      console.log(e)
-    })
-
-  });
-
-  // 「いいね」されていないハートをクリックすると「いいね」される
-  $('.inactive-heart').on('click', () => {
-    const postId = $(this).attr('id')
+// 「いいね」されていないハートをクリックすると「いいね」される
+const listenInactiveHeartEvent = (postId) => {
+  $('#' + postId + '.inactive-heart').on('click', () => {
     axios.post(`/posts/${postId}/like`)
       .then((response) => {
         if (response.data.status === 'ok') {
-          $('.active-heart').removeClass('hidden')
-          $('.inactive-heart').addClass('hidden')
+          $('#' + postId + '.active-heart').removeClass('hidden')
+          $('#' + postId + '.inactive-heart').addClass('hidden')
         }
       })
       .catch((e) => {
         console.log(e)
       })
   })
+}
 
-  // 「いいね」されているハートをクリックすると「いいね」が解除される
-  $('.active-heart').on('click', () => {
-    const postId = $(this).attr('id')
+// 「いいね」されているハートをクリックすると「いいね」が解除される
+const listenActiveHeartEvent = (postId) => {
+  $('#' + postId + '.active-heart').on('click', () => {
     axios.delete(`/posts/${postId}/like`)
       .then((response) => {
         if (response.data.status === 'ok') {
-          $('.active-heart').addClass('hidden')
-          $('.inactive-heart').removeClass('hidden')
+          $('#' + postId + '.active-heart').addClass('hidden')
+          $('#' + postId + '.inactive-heart').removeClass('hidden')
         }
       })
       .catch((e) => {
-        window.alert('Error')
+        console.log(e)
       })
   })
+}
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  $('.active-heart').each(function() {
+    const postId = $(this).attr('id')
+
+    // いいね判定をもとに、いいねを表示
+    axios.get(`/posts/${postId}/like`)
+    .then((response) => {
+      const hasLiked = response.data.hasLiked
+      handleHeartDisplay(hasLiked, postId)
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+
+    listenInactiveHeartEvent(postId)
+    listenActiveHeartEvent(postId)
+  });
 
 
+  // プロフィールのavatarをクリックすると画像アップローダーが開く
   $(function(){
     $('.profile-avatar-img').on('click', function(){
       $('#upFile').click();

@@ -1,0 +1,11 @@
+.container
+    .comment_list
+        %p commentのindexだよ
+        %p commentのindexだよ
+        %p commentのindexだよ
+    = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
+        %div
+            = f.label :content, 'コメント'
+        %div
+            = f.text_area :content
+        = f.submit 'コメントを投稿', class: 'btn-primary'

@@ -1,0 +1,7 @@
+@import './variables';
+
+.avatar {
+    width: $avatar-size + 20;
+    height: $avatar-size + 20;
+    border-radius: 100%;
+}

@@ -1,3 +1,21 @@
-// Place all the styles related to the comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+@import './variables';
+
+
+.comment_list {
+    display: flex;
+    margin-bottom: 30px;
+    p {
+        margin: 0;
+    }
+    .comment_avatar {
+        margin-right: 10px;
+    }
+    .comment_name {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .comment_content {
+        font-size: $font-sm;
+        color: $comment-text-color;
+    }
+}

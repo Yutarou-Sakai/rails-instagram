@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy #ユーザーは１つのプロフィールを持つ
   has_many :posts, dependent: :destroy #ユーザーは複数の投稿を持つ
-  has_many :likes, dependent: :destroy #投稿は複数のいいねを持つ
+  has_many :likes, dependent: :destroy #ユーザーは複数のいいねを持つ
+  has_many :comments, dependent: :destroy #ユーザーは複数のコメントを持つ
 
   attr_accessor :login
 

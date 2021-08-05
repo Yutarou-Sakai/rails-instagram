@@ -23,6 +23,21 @@ require("./slick")
 
 
 
+// コメントのHTMLをappend
+const appendCommentHtml = (comment) => {
+  $('.comment_lists').append(
+    `<div class="comment_list">
+      <div class="comment_avatar">
+        <img src="${comment.user.avatar_image}" class="avatar">
+      </div>
+      <div class="comment_text">
+        <p class="comment_name">${comment.user.username}</p>
+        <p class="comment_content">${comment.content}</p>
+      </div>
+    <div>`
+  )
+}
+
 // いいねされてるか確認して判定
 const handleHeartDisplay = (hasLiked, postId) => {
   if (hasLiked) {
@@ -67,7 +82,7 @@ const listenActiveHeartEvent = (postId) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ＝＝＝　いいね機能　＝＝＝
+  // ＝＝＝　コメント機能　＝＝＝
   const dataset = $('#post-show').data()
   const showId = dataset.showId
 
@@ -76,17 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => {
         const comments = response.data
         comments.forEach((comment) => {
-          $('.comment_lists').append(
-            `<div class="comment_list">
-              <div class="comment_avatar">
-                <img src="${comment.user.avatar_image}" class="avatar">
-              </div>
-              <div class="comment_text">
-                <p class="comment_name">${comment.user.username}</p>
-                <p class="comment_content">${comment.content}</p>
-              </div>
-            <div>`
-          )
+          appendCommentHtml(comment)
         });
       })
   }

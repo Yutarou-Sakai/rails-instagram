@@ -96,6 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
+  $('.show-comment-form').on('click', () => {
+    $('.show-comment-form').addClass('hidden')
+    $('.comment-text-area').removeClass('hidden')
+  })
+
+  $('.close-comment-form').on('click', () => {
+    $('.show-comment-form').removeClass('hidden')
+    $('.comment-text-area').addClass('hidden')
+  })
+
 
   // ＝＝＝　いいね機能　＝＝＝
   $('.active-heart').each(function() {

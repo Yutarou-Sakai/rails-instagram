@@ -47,6 +47,9 @@ textarea {
     min-height: 350px;
     resize: vertical;
     border: 1px solid #EBEBEB;
+    &.sm_area {
+        min-height: 120px;
+    }
 }
 
 .field {

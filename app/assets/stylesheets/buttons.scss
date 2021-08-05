@@ -8,6 +8,7 @@
     color: white;
     padding: 16px 0;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .btn-secondary {
@@ -18,6 +19,18 @@
     color: $primary-color;
     padding: 16px 0;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: $cancel-color;
+    border: solid 1px $primary-color;
+    width: 100%;
+    text-align: center;
+    color: $white-text-color;
+    padding: 16px 0;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .modal-btn-primary {

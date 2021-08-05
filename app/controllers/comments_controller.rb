@@ -4,21 +4,14 @@ class CommentsController < ApplicationController
 
 
     def index
-        # @comment = @post.comments.build
         render json: @comments, include: { user: [:profile] }
     end
 
     def create
         @comment = @post.comments.build(comment_params)
-        @comment.user = current_user
-        if @comment.save
-            render json: @comment
-            # redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
-            @comment.content = ''
-        else
-            flash.now[:error] = '追加できませんでした'
-            render :index
-        end
+        @comment.save
+
+        render json: @comment, include: { user: [:profile] }
     end
 
     def destroy
@@ -27,7 +20,7 @@ class CommentsController < ApplicationController
 
     private
     def comment_params
-        params.require(:comment).permit(:content)
+        params.require(:comment).permit(:content).merge(user_id: current_user.id)
     end
 
     def set_post

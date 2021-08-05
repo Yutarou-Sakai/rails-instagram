@@ -38,6 +38,20 @@ const appendCommentHtml = (comment) => {
   )
 }
 
+// コメントのフォーム開閉
+const showCommentForm = () => {
+  $('.show-comment-form').on('click', () => {
+    $('.show-comment-form').addClass('hidden')
+    $('.comment-text-area').removeClass('hidden')
+  })
+}
+const closeCommentForm = () => {
+  $('.close-comment-form').on('click', () => {
+    $('.show-comment-form').removeClass('hidden')
+    $('.comment-text-area').addClass('hidden')
+  })
+}
+
 // いいねされてるか確認して判定
 const handleHeartDisplay = (hasLiked, postId) => {
   if (hasLiked) {
@@ -96,14 +110,23 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
-  $('.show-comment-form').on('click', () => {
-    $('.show-comment-form').addClass('hidden')
-    $('.comment-text-area').removeClass('hidden')
-  })
+  showCommentForm()
+  closeCommentForm()
 
-  $('.close-comment-form').on('click', () => {
-    $('.show-comment-form').removeClass('hidden')
-    $('.comment-text-area').addClass('hidden')
+  $('.add-comment-btn').on('click', () => {
+    const content = $('#comment_content').val()
+    if (!content) {
+      window.alert('コメントを入力してください')
+    } else {
+      axios.post(`/posts/${showId}/comments`, {
+        comment: {content: content}
+      })
+        .then((res) => {
+          const comment = res.data
+          appendCommentHtml(comment)
+          $('#comment_content').val('')
+        })
+    }
   })
 
 

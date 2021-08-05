@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
 
-  resources :posts, only: [:index, :new, :create] do
+  resources :posts, only: [:index, :show, :new, :create] do
     resource :like, only: [:show, :create, :destroy]
     resources :comments, shallow: true, only: [:index, :create, :destroy]
   end

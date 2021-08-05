@@ -1,3 +1,5 @@
 class ProfileSerializer < ActiveModel::Serializer
-  attributes :id, :avatar
+  include Rails.application.routes.url_helpers
+
+  attributes :id, :avatar_image
 end

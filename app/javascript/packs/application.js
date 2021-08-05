@@ -67,6 +67,26 @@ const listenActiveHeartEvent = (postId) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  const dataset = $('#post-show').data()
+  const showId = dataset.postId
+
+  axios.get(`/posts/${showId}/comments`)
+    .then((response) => {
+      const comments = response.data
+      comments.forEach((comment) => {
+        $('.comment_lists').append(
+          `<div class="comment_list">
+            <div class="comment_avatar"><img class="avatar"></div>
+            <div class="comment_text">
+              <p class="comment_name">${comment.name}</p>
+              <p class="comment_content">${comment.content}</p>
+            </div>
+          <div>`
+        )
+      });
+    })
+
+
   $('.active-heart').each(function() {
     const postId = $(this).attr('id')
 

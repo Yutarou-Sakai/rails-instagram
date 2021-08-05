@@ -1,0 +1,34 @@
+.container
+    .post_content#post-show{data: {post_id: @post.id}}
+        .content_info
+            .content_info_image
+                = image_tag @post.user.avatar_image, class: "avatar"
+            .content_info_text 
+                %p.text_name= @post.user.username
+                %P.text_day= @post.created_at.to_s(:datetime_jp)
+        .content_images.slider
+            - if @post.content_images.attached?
+                - @post.content_images.each do |image|
+                    = image_tag image
+        .content_icon 
+            = image_tag 'heart-active.svg', class: "post_icon hidden active-heart", id: "#{@post.id}"
+            = image_tag 'heart.svg', class: "post_icon hidden inactive-heart", id: "#{@post.id}"
+            = link_to post_path(@post.id) do
+                = image_tag "comment.svg", class: "content_icon_comment post_icon"
+            = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
+                = image_tag "share.svg", class: "content_icon_share post_icon"
+        .content_body 
+            %p= simple_format(@post.content)
+    %h2 コメント一覧
+    .comment_lists
+    -#         .comment_avatar
+    -#             = image_tag comment.user.avatar_image, class: "avatar"
+    -#         .comment_text
+    -#             %p.comment_name= comment.user.username
+    -#             %p.comment_content= comment.content
+    = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
+        %div
+            = f.label :content, 'コメント'
+        %div
+            = f.text_area :content
+        = f.submit 'コメントを投稿', class: 'btn-primary'

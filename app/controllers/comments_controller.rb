@@ -4,14 +4,16 @@ class CommentsController < ApplicationController
 
 
     def index
-        @comment = @post.comments.build
+        # @comment = @post.comments.build
+        render json: @comments, include: { user: [:profile] }
     end
 
     def create
         @comment = @post.comments.build(comment_params)
         @comment.user = current_user
         if @comment.save
-            redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
+            render json: @comment
+            # redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
             @comment.content = ''
         else
             flash.now[:error] = '追加できませんでした'

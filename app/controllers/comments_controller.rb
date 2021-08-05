@@ -1,19 +1,28 @@
 class CommentsController < ApplicationController
     before_action :set_post, only: [:index, :create]
-    before_action :set_comments, only: [:index, :create]
+    before_action :set_comments, only: [:create]
 
 
     def index
-        @comment = @post.comments.build
+        # @comment = @post.comments.build
 
-        render json: @comments
+        @user_name = @post.user.username
+
+        # @profile = Profile.find(params[:post_id])
+        # avatar_data = url_for(profile.avatar)
+
+        # render json: @comments
+        respond_to do |f|
+            f.json { render json: {comments: @comments, userName: @user_name }}
+        end
     end
 
     def create
         @comment = @post.comments.build(comment_params)
         @comment.user = current_user
         if @comment.save
-            redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
+            render json: @comment
+            # redirect_to post_comments_path(@post), notice: 'コメントを追加しました'
             @comment.content = ''
         else
             flash.now[:error] = '追加できませんでした'

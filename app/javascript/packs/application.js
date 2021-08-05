@@ -67,26 +67,32 @@ const listenActiveHeartEvent = (postId) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ＝＝＝　いいね機能　＝＝＝
   const dataset = $('#post-show').data()
-  const showId = dataset.postId
+  const showId = dataset.showId
 
-  axios.get(`/posts/${showId}/comments`)
-    .then((response) => {
-      const comments = response.data
-      comments.forEach((comment) => {
-        $('.comment_lists').append(
-          `<div class="comment_list">
-            <div class="comment_avatar"><img class="avatar"></div>
-            <div class="comment_text">
-              <p class="comment_name">${comment.name}</p>
-              <p class="comment_content">${comment.content}</p>
-            </div>
-          <div>`
-        )
-      });
-    })
+  if (typeof showId !== 'undefined') {
+    axios.get(`/posts/${showId}/comments`)
+      .then((response) => {
+        const comments = response.data
+        comments.forEach((comment) => {
+          $('.comment_lists').append(
+            `<div class="comment_list">
+              <div class="comment_avatar">
+                <img src="${comment.user.avatar_image}" class="avatar">
+              </div>
+              <div class="comment_text">
+                <p class="comment_name">${comment.user.username}</p>
+                <p class="comment_content">${comment.content}</p>
+              </div>
+            <div>`
+          )
+        });
+      })
+  }
 
 
+  // ＝＝＝　いいね機能　＝＝＝
   $('.active-heart').each(function() {
     const postId = $(this).attr('id')
 
@@ -105,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // ＝＝＝　プロフィール更新機能　＝＝＝
   // プロフィールのavatarをクリックすると画像アップローダーが開く
   $(function(){
     $('.profile-avatar-img').on('click', function(){

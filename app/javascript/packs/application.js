@@ -97,37 +97,39 @@ const listenActiveHeartEvent = (postId) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   // ＝＝＝　コメント機能　＝＝＝
-  const dataset = $('#post-show').data()
-  const showId = dataset.showId
-
-  if (typeof showId !== 'undefined') {
-    axios.get(`/posts/${showId}/comments`)
-      .then((response) => {
-        const comments = response.data
-        comments.forEach((comment) => {
-          appendCommentHtml(comment)
-        });
-      })
-  }
-
-  showCommentForm()
-  closeCommentForm()
-
-  $('.add-comment-btn').on('click', () => {
-    const content = $('#comment_content').val()
-    if (!content) {
-      window.alert('コメントを入力してください')
-    } else {
-      axios.post(`/posts/${showId}/comments`, {
-        comment: {content: content}
-      })
-        .then((res) => {
-          const comment = res.data
-          appendCommentHtml(comment)
-          $('#comment_content').val('')
+  if ($("#post-show").length) {
+    const dataset = $('#post-show').data()
+    const showId = dataset.showId
+  
+    if (typeof showId !== 'undefined') {
+      axios.get(`/posts/${showId}/comments`)
+        .then((response) => {
+          const comments = response.data
+          comments.forEach((comment) => {
+            appendCommentHtml(comment)
+          });
         })
     }
-  })
+  
+    showCommentForm()
+    closeCommentForm()
+  
+    $('.add-comment-btn').on('click', () => {
+      const content = $('#comment_content').val()
+      if (!content) {
+        window.alert('コメントを入力してください')
+      } else {
+        axios.post(`/posts/${showId}/comments`, {
+          comment: {content: content}
+        })
+          .then((res) => {
+            const comment = res.data
+            appendCommentHtml(comment)
+            $('#comment_content').val('')
+          })
+      }
+    })
+  }
 
 
   // ＝＝＝　いいね機能　＝＝＝

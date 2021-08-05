@@ -1,20 +1,11 @@
 class CommentsController < ApplicationController
     before_action :set_post, only: [:index, :create]
-    before_action :set_comments, only: [:create]
+    before_action :set_comments, only: [:index, :create]
 
 
     def index
         # @comment = @post.comments.build
-
-        @user_name = @post.user.username
-
-        # @profile = Profile.find(params[:post_id])
-        # avatar_data = url_for(profile.avatar)
-
-        # render json: @comments
-        respond_to do |f|
-            f.json { render json: {comments: @comments, userName: @user_name }}
-        end
+        render json: @comments, include: { user: [:profile] }
     end
 
     def create

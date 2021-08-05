@@ -23,6 +23,35 @@ require("./slick")
 
 
 
+// コメントのHTMLをappend
+const appendCommentHtml = (comment) => {
+  $('.comment_lists').append(
+    `<div class="comment_list">
+      <div class="comment_avatar">
+        <img src="${comment.user.avatar_image}" class="avatar">
+      </div>
+      <div class="comment_text">
+        <p class="comment_name">${comment.user.username}</p>
+        <p class="comment_content">${comment.content}</p>
+      </div>
+    <div>`
+  )
+}
+
+// コメントのフォーム開閉
+const showCommentForm = () => {
+  $('.show-comment-form').on('click', () => {
+    $('.show-comment-form').addClass('hidden')
+    $('.comment-text-area').removeClass('hidden')
+  })
+}
+const closeCommentForm = () => {
+  $('.close-comment-form').on('click', () => {
+    $('.show-comment-form').removeClass('hidden')
+    $('.comment-text-area').addClass('hidden')
+  })
+}
+
 // いいねされてるか確認して判定
 const handleHeartDisplay = (hasLiked, postId) => {
   if (hasLiked) {
@@ -67,26 +96,43 @@ const listenActiveHeartEvent = (postId) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const dataset = $('#post-show').data()
-  const showId = dataset.postId
-
-  axios.get(`/posts/${showId}/comments`)
-    .then((response) => {
-      const comments = response.data
-      comments.forEach((comment) => {
-        $('.comment_lists').append(
-          `<div class="comment_list">
-            <div class="comment_avatar"><img class="avatar"></div>
-            <div class="comment_text">
-              <p class="comment_name">${comment.name}</p>
-              <p class="comment_content">${comment.content}</p>
-            </div>
-          <div>`
-        )
-      });
+  // ＝＝＝　コメント機能　＝＝＝
+  if ($("#post-show").length) {
+    const dataset = $('#post-show').data()
+    const showId = dataset.showId
+  
+    if (typeof showId !== 'undefined') {
+      axios.get(`/posts/${showId}/comments`)
+        .then((response) => {
+          const comments = response.data
+          comments.forEach((comment) => {
+            appendCommentHtml(comment)
+          });
+        })
+    }
+  
+    showCommentForm()
+    closeCommentForm()
+  
+    $('.add-comment-btn').on('click', () => {
+      const content = $('#comment_content').val()
+      if (!content) {
+        window.alert('コメントを入力してください')
+      } else {
+        axios.post(`/posts/${showId}/comments`, {
+          comment: {content: content}
+        })
+          .then((res) => {
+            const comment = res.data
+            appendCommentHtml(comment)
+            $('#comment_content').val('')
+          })
+      }
     })
+  }
 
 
+  // ＝＝＝　いいね機能　＝＝＝
   $('.active-heart').each(function() {
     const postId = $(this).attr('id')
 
@@ -105,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // ＝＝＝　プロフィール更新機能　＝＝＝
   // プロフィールのavatarをクリックすると画像アップローダーが開く
   $(function(){
     $('.profile-avatar-img').on('click', function(){

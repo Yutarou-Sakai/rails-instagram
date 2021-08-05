@@ -1,5 +1,5 @@
 .container
-    .post_content#post-show{data: {post_id: @post.id}}
+    .post_content#post-show{data: {show_id: @post.id}}
         .content_info
             .content_info_image
                 = image_tag @post.user.avatar_image, class: "avatar"
@@ -19,16 +19,21 @@
                 = image_tag "share.svg", class: "content_icon_share post_icon"
         .content_body 
             %p= simple_format(@post.content)
+
     %h2 コメント一覧
     .comment_lists
-    -#         .comment_avatar
-    -#             = image_tag comment.user.avatar_image, class: "avatar"
-    -#         .comment_text
-    -#             %p.comment_name= comment.user.username
-    -#             %p.comment_content= comment.content
-    = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
-        %div
-            = f.label :content, 'コメント'
-        %div
-            = f.text_area :content
-        = f.submit 'コメントを投稿', class: 'btn-primary'
+
+    .btn-secondary.show-comment-form
+        コメントを追加
+    .comment-text-area.hidden
+        = text_area_tag :comment_content, '', class: 'sm_area'
+        .btn-secondary.add-comment-btn
+            コメントを投稿
+        .btn-cancel.close-comment-form
+            キャンセル
+    -# = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
+    -#     %div
+    -#         = f.label :content, 'コメント'
+    -#     %div
+    -#         = f.text_area :content
+    -#     = f.submit 'コメントを投稿', class: 'btn-primary'

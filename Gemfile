@@ -48,6 +48,8 @@ group :development do
   gem 'spring'
 
   gem 'erb2haml'
+  gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :test do

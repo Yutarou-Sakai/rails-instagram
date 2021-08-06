@@ -9,7 +9,9 @@ class CommentsController < ApplicationController
 
     def create
         @comment = @post.comments.build(comment_params)
-        @comment.save
+        if @comment.save
+            send_email(@comment, @post)
+        end
 
         render json: @comment, include: { user: [:profile] }
     end
@@ -17,6 +19,8 @@ class CommentsController < ApplicationController
     def destroy
         
     end
+
+
 
     private
     def comment_params
@@ -29,5 +33,13 @@ class CommentsController < ApplicationController
 
     def set_comments
         @comments = Comment.where(post_id: @post.id)
+    end
+
+    def send_email(comment, post)
+        username = '@' + current_user.username
+        content = comment.content
+        if content.include?(username)
+            MentionMailer.comment_mention(User.first, post).deliver_now
+        end
     end
 end

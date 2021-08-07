@@ -20,5 +20,6 @@ module RailsInstagram
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.time_zone = 'Tokyo'
+    config.active_job.queue_adapter = :sidekiq
   end
 end

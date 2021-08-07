@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
         username = '@' + current_user.username
         content = comment.content
         if content.include?(username)
-            MentionMailer.comment_mention(User.first, post).deliver_now
+            MentionMailer.comment_mention(User.first, post).deliver_later
         end
     end
 end

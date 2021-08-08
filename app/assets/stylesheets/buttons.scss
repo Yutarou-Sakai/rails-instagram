@@ -33,6 +33,34 @@
     cursor: pointer;
 }
 
+.btn-follow {
+    display: inline-block;
+    background-color: none;
+    border: solid 1px $primary-color;
+    border-radius: 5px;
+    color: $primary-color;
+    font-size: $font-sm;
+    width: 25%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.btn-following {
+    display: inline-block;
+    background-color: $primary-color;
+    border: solid 1px $primary-color;
+    border-radius: 5px;
+    color: $white-text-color;
+    font-size: $font-sm;
+    width: 25%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
 .modal-btn-primary {
     align-items: center;
     margin: 0 auto;

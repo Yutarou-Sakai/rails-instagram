@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
 
+  resources :accounts, only: [:show] do 
+    resources :follows, only: [:create]
+    resources :unfollows, only: [:create]
+  end
+
   resources :posts, only: [:index, :show, :new, :create] do
     resource :like, only: [:show, :create, :destroy]
     resources :comments, shallow: true, only: [:index, :create, :destroy]

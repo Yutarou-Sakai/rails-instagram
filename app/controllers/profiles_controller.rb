@@ -4,6 +4,11 @@ class ProfilesController < ApplicationController
 
     def show
         @profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
+
+        @user = current_user
+        @post_count = @user.post_count(@user)
+        @follower_count = @user.follower_count(@user)
+        @following_count = @user.following_count(@user)
     end
 
     def edit

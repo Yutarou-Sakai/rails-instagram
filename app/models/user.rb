@@ -25,6 +25,23 @@ class User < ApplicationRecord
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
 
+  
+  # カウント
+  def post_count(user)
+    posts = user.posts
+    posts.size
+  end
+
+  def follower_count(user)
+    followers = user.followers
+    followers.size
+  end
+
+  def following_count(user)
+    followings = user.followings
+    followings.size
+  end
+
   # いいね機能
   def has_liked?(post)
     likes.exists?(post_id: post.id)

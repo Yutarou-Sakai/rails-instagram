@@ -1,7 +1,43 @@
 @import './variables';
 
 .avatar {
-    width: $avatar-size + 20;
-    height: $avatar-size + 20;
+    width: $avatar-size;
+    height: $avatar-size;
     border-radius: 100%;
+}
+
+.profile_avatar {
+    img {
+        width: $avatar-size + 30;
+        height: $avatar-size + 30;
+        border-top: 2px solid #CD4996;
+        border-left: 2px solid #CD4996;
+        border-bottom: 2px solid #EA7F42;
+        border-right: 2px solid #EA7F42;
+        &:before,
+        &:after{
+        content: "";
+        display: block;
+        height: 2px;
+        background: linear-gradient(to right, #CD4996 0%, #EA7F42 100%);
+        }
+    }
+}
+
+.content_info_image {
+    img {
+        width: $avatar-size;
+        height: $avatar-size;
+        border-top: 2px solid #CD4996;
+        border-left: 2px solid #CD4996;
+        border-bottom: 2px solid #EA7F42;
+        border-right: 2px solid #EA7F42;
+        &:before,
+        &:after{
+        content: "";
+        display: block;
+        height: 2px;
+        background: linear-gradient(to right, #CD4996 0%, #EA7F42 100%);
+        }
+    }
 }

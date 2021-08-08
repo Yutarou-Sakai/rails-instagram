@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy #ユーザーは複数のいいねを持つ
   has_many :comments, dependent: :destroy #ユーザーは複数のコメントを持つ
 
+  # 自分がフォローしているuserを探す
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :following
+
   attr_accessor :login
 
   validates :username,
@@ -19,6 +23,10 @@ class User < ApplicationRecord
 
   def has_liked?(post)
     likes.exists?(post_id: post.id)
+  end
+
+  def follow!(user)
+    following_relationships.create!(following_id: user.id)
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)

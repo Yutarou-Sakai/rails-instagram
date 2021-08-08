@@ -93,6 +93,24 @@ const listenActiveHeartEvent = (postId) => {
   })
 }
 
+// フォローボタンの表示切り替え
+const followBtnSwitcher = (currentUserId, accountId) => {
+  if (typeof(currentUserId && accountId) !== 'undefined') {
+    axios.get(`/accounts/${accountId}/follows/${currentUserId}/`)
+      .then((response) => {
+        if (response.data.followStatus == true) {
+          $('.btn-following').removeClass('hidden')
+        } else {
+          $('.btn-follow').removeClass('hidden')
+        }
+      })
+  }
+}
+
+
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -149,6 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
     listenInactiveHeartEvent(postId)
     listenActiveHeartEvent(postId)
   });
+
+
+  // ＝＝＝　フォロー機能　＝＝＝
+  // Follow・Followingの表示切り替え
+  if ($(".profile").length) {
+    const currentUserId = $('.header').data().id
+    const accountId = $('.profile').data().id
+    followBtnSwitcher(currentUserId, accountId)
+  }
+
 
 
   // ＝＝＝　プロフィール更新機能　＝＝＝

@@ -6,7 +6,7 @@
     .profile_follow 
         - if @user != current_user
             - if current_user&.has_followed?(@user)
-                %p.btn-following Following
+                = link_to 'Following', account_unfollows_path(@user), data: {method: 'post'}, class: 'btn-following'
             - else
                 = link_to 'Follow', account_follows_path(@user), data: {method: 'post'}, class: 'btn-follow'
     .profile_info 

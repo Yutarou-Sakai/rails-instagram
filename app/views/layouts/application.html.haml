@@ -11,7 +11,7 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js", type: "text/javascript"}
   %body
-    %header.header
+    %header.header{data: {id: current_user.id}}
       .header_logos
         - if !current_page?(root_path)
           = link_to :back do

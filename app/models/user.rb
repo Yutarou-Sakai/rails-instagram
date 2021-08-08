@@ -25,10 +25,29 @@ class User < ApplicationRecord
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
 
+  
+  # カウント
+  def post_count(user)
+    posts = user.posts
+    posts.size
+  end
+
+  def follower_count(user)
+    followers = user.followers
+    followers.size
+  end
+
+  def following_count(user)
+    followings = user.followings
+    followings.size
+  end
+
+  # いいね機能
   def has_liked?(post)
     likes.exists?(post_id: post.id)
   end
 
+  # フォロー機能
   def follow!(user)
     user_id = get_user_id(user)
     following_relationships.create!(following_id: user_id)
@@ -44,6 +63,7 @@ class User < ApplicationRecord
     following_relationships.exists?(following_id: user.id)
   end
 
+  # メール機能
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -53,10 +73,12 @@ class User < ApplicationRecord
     end
   end
 
+  # プロフィール関連
   def prepare_profile #プロフィールの情報があればそれを、なければ空を渡す
     profile || build_profile
   end
 
+  # アバター関連
   def avatar_image #アバターがあればそれを、なければno-img-avatar.jpgを返す
     if profile&.avatar&.attached?
       profile.avatar

@@ -93,6 +93,56 @@ const listenActiveHeartEvent = (postId) => {
   })
 }
 
+// フォローボタンの表示切り替え
+const followBtnSwitcher = (currentUserId, accountId) => {
+  if (typeof(currentUserId && accountId) !== 'undefined') {
+    axios.get(`/accounts/${accountId}/follows/${currentUserId}/`)
+      .then((response) => {
+        if (response.data.followStatus == true) {
+          $('.btn-following').removeClass('hidden')
+        } else {
+          $('.btn-follow').removeClass('hidden')
+        }
+      })
+  }
+}
+
+// フォロー機能
+const listenFollowBtnEvent = (accountId) => {
+  $('.btn-follow').on('click', function() {
+    axios.post(`/accounts/${accountId}/follows`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('.btn-follow').addClass('hidden')
+          $('.btn-following').removeClass('hidden')
+        }
+      })
+      .catch((e) =>{
+        console.log(e)
+      })
+  })
+}
+
+// フォロー解除機能
+const listenFollowingBtnEvent = (accountId) => {
+  $('.btn-following').on('click', function() {
+    axios.post(`/accounts/${accountId}/unfollows`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('.btn-follow').removeClass('hidden')
+          $('.btn-following').addClass('hidden')
+        }
+      })
+      .catch((e) =>{
+        console.log(e)
+      })
+  })
+}
+
+
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -138,17 +188,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // いいね判定をもとに、いいねを表示
     axios.get(`/posts/${postId}/like`)
-    .then((response) => {
-      const hasLiked = response.data.hasLiked
-      handleHeartDisplay(hasLiked, postId)
-    })
-    .catch((e) => {
-      console.log(e)
-    })
+      .then((response) => {
+        const hasLiked = response.data.hasLiked
+        handleHeartDisplay(hasLiked, postId)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
 
     listenInactiveHeartEvent(postId)
     listenActiveHeartEvent(postId)
   });
+
+
+  // ＝＝＝　フォロー機能　＝＝＝
+  if ($(".profile").length) {
+    const currentUserId = $('.header').data().id
+    const accountId = $('.profile').data().id
+    
+    // Follow・Followingの表示切り替え
+    followBtnSwitcher(currentUserId, accountId)
+
+    // Follow機能
+    listenFollowBtnEvent(accountId)
+    // unFollow機能
+    listenFollowingBtnEvent(accountId)
+  }
+
 
 
   // ＝＝＝　プロフィール更新機能　＝＝＝

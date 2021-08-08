@@ -107,6 +107,38 @@ const followBtnSwitcher = (currentUserId, accountId) => {
   }
 }
 
+// フォロー機能
+const listenFollowBtnEvent = (accountId) => {
+  $('.btn-follow').on('click', function() {
+    axios.post(`/accounts/${accountId}/follows`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('.btn-follow').addClass('hidden')
+          $('.btn-following').removeClass('hidden')
+        }
+      })
+      .catch((e) =>{
+        console.log(e)
+      })
+  })
+}
+
+// フォロー解除機能
+const listenFollowingBtnEvent = (accountId) => {
+  $('.btn-following').on('click', function() {
+    axios.post(`/accounts/${accountId}/unfollows`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('.btn-follow').removeClass('hidden')
+          $('.btn-following').addClass('hidden')
+        }
+      })
+      .catch((e) =>{
+        console.log(e)
+      })
+  })
+}
+
 
 
 
@@ -178,32 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
     followBtnSwitcher(currentUserId, accountId)
 
     // Follow機能
-    $('.btn-follow').on('click', function() {
-      axios.post(`/accounts/${accountId}/follows`)
-        .then((response) => {
-          if (response.data.status === 'ok') {
-            $('.btn-follow').addClass('hidden')
-            $('.btn-following').removeClass('hidden')
-          }
-        })
-        .catch((e) =>{
-          console.log(e)
-        })
-    })
-
+    listenFollowBtnEvent(accountId)
     // unFollow機能
-    $('.btn-following').on('click', function() {
-      axios.post(`/accounts/${accountId}/unfollows`)
-        .then((response) => {
-          if (response.data.status === 'ok') {
-            $('.btn-follow').removeClass('hidden')
-            $('.btn-following').addClass('hidden')
-          }
-        })
-        .catch((e) =>{
-          console.log(e)
-        })
-    })
+    listenFollowingBtnEvent(accountId)
   }
 
 

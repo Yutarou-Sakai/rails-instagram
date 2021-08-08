@@ -2,7 +2,8 @@
     .post_content#post-show{data: {show_id: @post.id}}
         .content_info
             .content_info_image
-                = image_tag @post.user.avatar_image, class: "avatar"
+                = link_to account_path(@post.user) do
+                    = image_tag @post.user.avatar_image, class: "avatar"
             .content_info_text 
                 %p.text_name= @post.user.username
                 %P.text_day= @post.created_at.to_s(:datetime_jp)

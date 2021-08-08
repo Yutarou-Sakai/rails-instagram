@@ -5,8 +5,8 @@
         = image_tag @user.avatar_image, class: "avatar"
     .profile_follow 
         - if @user != current_user
-            = link_to 'Following', account_unfollows_path(@user), data: {method: 'post'}, class: 'btn-following hidden'
-            = link_to 'Follow', account_follows_path(@user), data: {method: 'post'}, class: 'btn-follow hidden'
+            %p.btn-following.hidden Following
+            %p.btn-follow.hidden Follow
     .profile_info 
         .profile_info_posts
             %p.profile_info_num 44

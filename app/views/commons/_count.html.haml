@@ -3,8 +3,9 @@
         %p.profile_info_num= @post_count 
         %p.profile_info_text Posts
     .profile_info_followers
-        %p.profile_info_num.follower_count= @follower_count
-        %p.profile_info_text Followers
+        = link_to account_followers_path(@user) do
+            %p.profile_info_num.follower_count= @follower_count
+            %p.profile_info_text Followers
     .profile_info_following
         = link_to account_followings_path(@user) do
             %p.profile_info_num= @following_count

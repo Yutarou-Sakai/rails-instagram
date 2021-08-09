@@ -1,0 +1,8 @@
+.container.follows_list
+    - follows.each do |follow|
+        .content_info
+            .content_info_image
+                = link_to account_path(follow.id) do
+                    = image_tag follow.avatar_image, class: "avatar"
+            .content_info_text 
+                %p.text_name= follow.username

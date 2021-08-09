@@ -1,10 +1,11 @@
 .profile_info 
     .profile_info_posts
-        %p.profile_info_num= post_count 
+        %p.profile_info_num= @post_count 
         %p.profile_info_text Posts
     .profile_info_followers
-        %p.profile_info_num.follower_count= follower_count
+        %p.profile_info_num.follower_count= @follower_count
         %p.profile_info_text Followers
     .profile_info_following
-        %p.profile_info_num= following_count
-        %p.profile_info_text Followings
+        = link_to account_followings_path(@user) do
+            %p.profile_info_num= @following_count
+            %p.profile_info_text Followings

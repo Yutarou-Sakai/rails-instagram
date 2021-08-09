@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :unfollows, only: [:create]
 
     resources :followings, only: [:index]
+    resources :followers, only: [:index]
   end
 
   resources :posts, only: [:index, :show, :new, :create] do

@@ -1,8 +1,1 @@
-.container.followings_list
-    - @followings.each do |following|
-        .content_info
-            .content_info_image
-                = link_to account_path(following.id) do
-                    = image_tag following.avatar_image, class: "avatar"
-            .content_info_text 
-                %p.text_name= following.username
+= render 'commons/follow_list', follows: @followings

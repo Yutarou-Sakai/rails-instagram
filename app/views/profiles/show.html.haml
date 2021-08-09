@@ -8,7 +8,7 @@
                 = f.file_field :avatar, style:"display:none;", id: 'upFile', class: 'form-avatar'
             =f.submit '変更', class: 'modal-btn-primary hidden', id: 'avatar-btn'
 
-    = render 'commons/count', post_count: @post_count, follower_count: @follower_count, following_count: @following_count
+    = render 'commons/count'
 
     .profile_contents
         .photos

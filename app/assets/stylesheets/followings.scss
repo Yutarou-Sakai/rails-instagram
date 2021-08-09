@@ -1,0 +1,23 @@
+@import './variables';
+
+.followings_list {
+    .content_info {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $border-list-color;
+        padding: 20px 0;
+        &_text {
+            margin-left: 15px;
+            p {
+                margin: 0;
+            }
+        }
+        .text_name {
+            font-weight: 600;
+            font-size: $font-sm;
+        }
+        .text_day {
+            font-size: $font-sm - 3;
+        }
+    }
+}

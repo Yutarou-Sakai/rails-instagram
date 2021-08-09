@@ -107,12 +107,27 @@ const followBtnSwitcher = (currentUserId, accountId) => {
   }
 }
 
+// フォロワー数カウントアップ機能
+const followersUpCounter = () => {
+  const followerCount = Number($(".follower_count").text());
+  const countUp = followerCount + 1;
+  $(".follower_count").text(countUp);
+}
+// フォロワー数カウントダウン機能
+const followersDownCounter = () => {
+  const followerCount = Number($(".follower_count").text());
+  const countUp = followerCount - 1;
+  $(".follower_count").text(countUp);
+}
+
 // フォロー機能
 const listenFollowBtnEvent = (accountId) => {
   $('.btn-follow').on('click', function() {
     axios.post(`/accounts/${accountId}/follows`)
       .then((response) => {
         if (response.data.status === 'ok') {
+          followersUpCounter()
+
           $('.btn-follow').addClass('hidden')
           $('.btn-following').removeClass('hidden')
         }
@@ -129,6 +144,8 @@ const listenFollowingBtnEvent = (accountId) => {
     axios.post(`/accounts/${accountId}/unfollows`)
       .then((response) => {
         if (response.data.status === 'ok') {
+          followersDownCounter()
+
           $('.btn-follow').removeClass('hidden')
           $('.btn-following').addClass('hidden')
         }
@@ -182,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
+
   // ＝＝＝　いいね機能　＝＝＝
   $('.active-heart').each(function() {
     const postId = $(this).attr('id')
@@ -199,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listenInactiveHeartEvent(postId)
     listenActiveHeartEvent(postId)
   });
+
 
 
   // ＝＝＝　フォロー機能　＝＝＝

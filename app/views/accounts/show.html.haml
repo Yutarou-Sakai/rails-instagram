@@ -7,16 +7,9 @@
         - if @user != current_user
             %p.btn-following.hidden Following
             %p.btn-follow.hidden Follow
-    .profile_info 
-        .profile_info_posts
-            %p.profile_info_num= @post_count 
-            %p.profile_info_text Posts
-        .profile_info_followers
-            %p.profile_info_num= @follower_count
-            %p.profile_info_text Followers
-        .profile_info_following
-            %p.profile_info_num= @following_count
-            %p.profile_info_text Followings
+
+    = render 'commons/count', post_count: @post_count, follower_count: @follower_count, following_count: @following_count
+
     .profile_contents
         .photos
             = image_tag "photo1.png"

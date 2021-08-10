@@ -221,8 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ＝＝＝　フォロー機能　＝＝＝
-  if ($(".profile").length) {
-    const currentUserId = $('.header').data().id
+  if ($("#profile").length) {
+    const currentUserId = $('#profile').data().id
     const accountId = $('.profile').data().id
     
     // Follow・Followingの表示切り替え

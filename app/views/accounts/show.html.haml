@@ -1,22 +1,23 @@
-.container.profile{data: {id: @user.id}}
-    .profile_name 
-        %p= @user.username
-    .profile_avatar 
-        = image_tag @user.avatar_image, class: "avatar"
-    .profile_follow 
-        - if @user != current_user
-            %p.btn-following.hidden Following
-            %p.btn-follow.hidden Follow
+.container#profile{data: {id: current_user.id}}
+    .profile{data: {id: @user.id}}
+        .profile_name 
+            %p= @user.username
+        .profile_avatar 
+            = image_tag @user.avatar_image, class: "avatar"
+        .profile_follow 
+            - if @user != current_user
+                %p.btn-following.hidden Following
+                %p.btn-follow.hidden Follow
 
-    = render 'commons/count'
+        = render 'commons/count'
 
-    .profile_contents
-        .photos
-            = image_tag "photo1.png"
-            = image_tag "photo2.png"
-            = image_tag "photo3.png"
-            = image_tag "photo4.png"
-            = image_tag "photo5.png"
-            = image_tag "photo3.png"
-            = image_tag "photo1.png"
-            = image_tag "photo2.png"
+        .profile_contents
+            .photos
+                = image_tag "photo1.png"
+                = image_tag "photo2.png"
+                = image_tag "photo3.png"
+                = image_tag "photo4.png"
+                = image_tag "photo5.png"
+                = image_tag "photo3.png"
+                = image_tag "photo1.png"
+                = image_tag "photo2.png"

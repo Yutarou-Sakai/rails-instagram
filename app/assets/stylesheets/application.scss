@@ -12,6 +12,7 @@
 @import "comments";
 @import "accounts";
 @import "follow_list";
+@import "footer";
 
 
 html {
@@ -31,11 +32,18 @@ html {
 }
 
 body {
-  height: 100%;
   background-color: $base-bg-color;
   font-size: 1em;
   color: $text-base-color;
   margin: 0;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  margin-bottom: 40px;
 }
 
 .container {

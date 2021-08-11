@@ -156,6 +156,20 @@ const listenFollowingBtnEvent = (accountId) => {
   })
 }
 
+// アバター画像ファイルのアップロード
+const avatarImageUpLoader = (file, reader) => {
+  if (file.type.indexOf("image") < 0){
+    alert('画像ファイルを選択してください')
+  } else {
+    reader.onload = () => {
+      const image = reader.result;
+      $('#profile-avatar-img').attr('src', image);
+      $("#avatar-btn").fadeIn();
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
 
 
 
@@ -240,19 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const uploader = $('input[type="file"]');
   
   $(uploader).on('change', (e) => {
-    const formData = e.target.files[0];
+    const file = e.target.files[0];
     const reader = new FileReader();
 
-    if (formData.type.indexOf("image") < 0){
-      alert('画像ファイルを選択してください')
-    } else {
-      reader.onload = () => {
-        const image = reader.result;
-        $('#profile-avatar-img').attr('src', image);
-      }
-      reader.readAsDataURL(formData);
-    }
-
+    avatarImageUpLoader(file, reader)
   });
 });
 

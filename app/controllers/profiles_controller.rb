@@ -15,26 +15,13 @@ class ProfilesController < ApplicationController
     end
 
     def update
-        # @profile.assign_attributes(profile_params) #@profileに対してパラメータの値を合体できる
-        # if @profile.save!
-        #     redirect_to profile_path, notice: 'プロフィールを更新しました'
-        # else
-        #     flash.now[:error] = '更新できませんでした'
-        #     render :show
-        # end
-
-        # @profile = current_user.build_profile(profile_params)
+        #@profileに対してパラメータの値を合体できる
         @profile.assign_attributes(profile_params)
-        # if @profile.save
-        #     render json: url_for(@profile.avatar)
-        # else
-        #     render json: user.errors, status: :bad_request
-        # end
-        respond_to do |format|
-            if @profile.update(profile_params)
-                format.html { redirect_to @profile }
-                # format.json { render json: { avatar: @profile.avatar } }
-            end
+        if @profile.save
+            redirect_to @profile, notice: 'プロフィール画像を変更しました'
+        else
+            flash.now[:error] = '更新できませんでした'
+            render :show
         end
     end
 

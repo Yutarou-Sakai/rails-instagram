@@ -2,11 +2,11 @@
     .profile_name 
         %p= current_user.username
     .profile_avatar 
-        %label
-            = image_tag current_user.avatar_image, class: "avatar", id: 'profile-avatar-img'
-            -# = form_with(model: @profile, url: profile_path, method: 'PUT', id: 'profile_form', remote: true) do |f|
-            = file_field :avatar, id: 'upFile', class: 'form-avatar'
-        = submit_tag '変更', class: 'modal-btn-primary hidden', id: 'avatar-btn'
+        = form_with(model: @profile, url: profile_path, method: 'PUT', id: 'profile_form', remote: true) do |f|
+            %label
+                = image_tag current_user.avatar_image, class: "avatar", id: 'profile-avatar-img'
+                = f.file_field :avatar, id: 'upFile', class: 'form-avatar'
+            = f.submit '変更', class: 'modal-btn-primary hidden', id: 'avatar-btn'
 
     = render 'commons/count'
 

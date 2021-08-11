@@ -2,6 +2,11 @@
 
 .profile {
     text-align: center;
+    &_avatar {
+        input {
+            display: none;
+        }
+    }
     &_info {
         display: flex;
         justify-content: center;

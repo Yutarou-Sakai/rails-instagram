@@ -156,6 +156,20 @@ const listenFollowingBtnEvent = (accountId) => {
   })
 }
 
+// アバター画像ファイルのアップロード
+const avatarImageUpLoader = (file, reader) => {
+  if (file.type.indexOf("image") < 0){
+    alert('画像ファイルを選択してください')
+  } else {
+    reader.onload = () => {
+      const image = reader.result;
+      $('#profile-avatar-img').attr('src', image);
+      $("#avatar-btn").fadeIn();
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
 
 
 
@@ -237,25 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ＝＝＝　プロフィール更新機能　＝＝＝
-  // プロフィールのavatarをクリックすると画像アップローダーが開く
-  $(function(){
-    $('.profile-avatar-img').on('click', function(){
-      $('#upFile').click();
-    });
-  });
-
-  // アップローダーで選んだファイルをプレビュー表示
-  const uploader = document.querySelector('.form-avatar');
+  const uploader = $('input[type="file"]');
+  
   $(uploader).on('change', (e) => {
-    $('#avatar-btn').fadeIn()
-
-    const file = uploader.files[0];
+    const file = e.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        const image = reader.result;
-        document.querySelector('.profile-avatar-img').setAttribute('src', image);
-      }
+
+    avatarImageUpLoader(file, reader)
   });
 });
 

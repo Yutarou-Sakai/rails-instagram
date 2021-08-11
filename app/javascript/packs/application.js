@@ -237,15 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ＝＝＝　プロフィール更新機能　＝＝＝
-  // プロフィールのavatarをクリックすると画像アップローダーが開く
-  $(function(){
-    $('.profile-avatar-img').on('click', function(){
-      $('#upFile').click();
-    });
-  });
-
   // アップローダーで選んだファイルをプレビュー表示
-  const uploader = document.querySelector('.form-avatar');
+  const uploader = $(".form-avatar")
+  console.log(jUploader.files)
+
   $(uploader).on('change', (e) => {
     $('#avatar-btn').fadeIn()
 
@@ -254,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.readAsDataURL(file);
     reader.onload = () => {
         const image = reader.result;
-        document.querySelector('.profile-avatar-img').setAttribute('src', image);
+        document.querySelector('#profile-avatar-img').setAttribute('src', image);
       }
   });
 });

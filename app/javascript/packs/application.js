@@ -237,20 +237,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ＝＝＝　プロフィール更新機能　＝＝＝
-  // アップローダーで選んだファイルをプレビュー表示
-  const uploader = $(".form-avatar")
-  console.log(jUploader.files)
-
+  const uploader = $('input[type="file"]');
+  
   $(uploader).on('change', (e) => {
-    $('#avatar-btn').fadeIn()
-
-    const file = uploader.files[0];
+    const formData = e.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
+
+    if (formData.type.indexOf("image") < 0){
+      alert('画像ファイルを選択してください')
+    } else {
+      reader.onload = () => {
         const image = reader.result;
-        document.querySelector('#profile-avatar-img').setAttribute('src', image);
+        $('#profile-avatar-img').attr('src', image);
       }
+      reader.readAsDataURL(formData);
+    }
+
   });
 });
 

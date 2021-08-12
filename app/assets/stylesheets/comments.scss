@@ -17,5 +17,6 @@
     .comment_content {
         font-size: $font-sm;
         color: $comment-text-color;
+        word-break: break-all;
     }
 }

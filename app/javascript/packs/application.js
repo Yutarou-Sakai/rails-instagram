@@ -23,8 +23,20 @@ require("./slick")
 
 
 
+// コメントの内容をエスケープ
+const escapeHTML = (string) => {
+  return string.replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27');
+}
+
 // コメントのHTMLをappend
 const appendCommentHtml = (comment) => {
+  const string = comment.content
+  const text = escapeHTML(string);
+
   $('.comment_lists').append(
     `<div class="comment_list">
       <div class="comment_avatar">
@@ -32,7 +44,7 @@ const appendCommentHtml = (comment) => {
       </div>
       <div class="comment_text">
         <p class="comment_name">${comment.user.username}</p>
-        <p class="comment_content">${comment.content}</p>
+        <p class="comment_content">${text}</p>
       </div>
     <div>`
   )
@@ -187,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((response) => {
           const comments = response.data
           comments.forEach((comment) => {
+            console.log(comment.content);
             appendCommentHtml(comment)
           });
         })

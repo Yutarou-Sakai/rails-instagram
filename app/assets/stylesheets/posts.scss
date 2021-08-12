@@ -34,6 +34,7 @@
     .content_body {
         p {
             font-size: $font-md;
+            word-break: break-all;
         }
     }
 }

@@ -19,7 +19,7 @@
             = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
                 = image_tag "share.svg", class: "content_icon_share post_icon"
         .content_body 
-            %p= simple_format(@post.content)
+            %p= simple_format(h @post.content)
 
     %h2 コメント一覧
     .comment_lists
@@ -32,9 +32,3 @@
             コメントを投稿
         .btn-cancel.close-comment-form
             キャンセル
-    -# = form_with(model: @comment, url: post_comments_path(@comment.post), local: true) do |f|
-    -#     %div
-    -#         = f.label :content, 'コメント'
-    -#     %div
-    -#         = f.text_area :content
-    -#     = f.submit 'コメントを投稿', class: 'btn-primary'

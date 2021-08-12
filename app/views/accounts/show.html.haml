@@ -11,13 +11,4 @@
 
         = render 'commons/count'
 
-        .profile_contents
-            .photos
-                = image_tag "photo1.png"
-                = image_tag "photo2.png"
-                = image_tag "photo3.png"
-                = image_tag "photo4.png"
-                = image_tag "photo5.png"
-                = image_tag "photo3.png"
-                = image_tag "photo1.png"
-                = image_tag "photo2.png"
+        = render 'commons/post_list', posts: @posts

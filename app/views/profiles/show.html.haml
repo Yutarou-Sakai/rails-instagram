@@ -10,10 +10,4 @@
 
     = render 'commons/count'
 
-    .profile_contents
-        .photos
-            - @posts.each do |post|
-                .photo
-                    = link_to post_path(post.id) do
-                        - if post.content_images.attached?
-                            = image_tag post.content_images.first
+    = render 'commons/post_list', posts: @posts

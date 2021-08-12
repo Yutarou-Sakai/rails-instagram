@@ -12,17 +12,8 @@
 
     .profile_contents
         .photos
-            .photo
-                = image_tag "photo1.png"
-            .photo
-                = image_tag "photo2.png"
-            .photo
-                = image_tag "photo3.png"
-            .photo
-                = image_tag "photo4.png"
-            .photo
-                = image_tag "photo5.png"
-            .photo
-                = image_tag "photo3.png"
-            .photo
-                = image_tag "photo1.png"
+            - @posts.each do |post|
+                .photo
+                    = link_to post_path(post.id) do
+                        - if post.content_images.attached?
+                            = image_tag post.content_images.first

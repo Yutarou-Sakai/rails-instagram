@@ -19,7 +19,7 @@
             = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
                 = image_tag "share.svg", class: "content_icon_share post_icon"
         .content_body 
-            = simple_format(h(@post.content))
+            %p= simple_format(h @post.content)
 
     %h2 コメント一覧
     .comment_lists

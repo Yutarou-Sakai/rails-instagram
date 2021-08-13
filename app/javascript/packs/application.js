@@ -199,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((response) => {
           const comments = response.data
           comments.forEach((comment) => {
-            console.log(comment.content);
             appendCommentHtml(comment)
           });
         })

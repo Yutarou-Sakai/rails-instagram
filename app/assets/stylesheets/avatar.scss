@@ -6,6 +6,12 @@
     border-radius: 100%;
 }
 
+.header_btn .avatar {
+    margin-top: 5px;
+    width: $avatar-size - 10;
+    height: $avatar-size - 10;
+}
+
 .profile_avatar {
     img {
         width: $avatar-size + 30;
@@ -26,8 +32,6 @@
 
 .content_info_image {
     img {
-        width: $avatar-size;
-        height: $avatar-size;
         border-top: 2px solid #CD4996;
         border-left: 2px solid #CD4996;
         border-bottom: 2px solid #EA7F42;

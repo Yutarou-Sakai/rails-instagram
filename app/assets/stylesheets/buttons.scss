@@ -1,5 +1,24 @@
 @import './variables';
 
+.header_log_in_btn {
+    background-color: $base-bg-color;
+    height: $avatar-size - 20;
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 10px 12px;
+    color: $black-bg-color;
+}
+
+.header_sign_in_btn {
+    background-color: $black-bg-color;
+    height: $avatar-size - 20;
+    border: 1px solid $base-bg-color;
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 10px 12px;
+    color: $base-bg-color;
+}
+
 .btn-primary {
     background-color: $primary-color;
     border: none;

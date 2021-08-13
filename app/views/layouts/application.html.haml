@@ -10,6 +10,7 @@
     %link{href: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css", rel: "stylesheet", type: "text/css"}/
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js", type: "text/javascript"}
+
   %body
     %header.header
       .header_logos
@@ -21,14 +22,16 @@
         - else
           = link_to new_post_path do
             = image_tag 'camera.svg', class: 'header_new'
-      - if user_signed_in?
-        .dropdown
-          = image_tag current_user.avatar_image, class: "avatar dropbtn"
-          .dropdown-content
-            = link_to 'プロフィール', profile_path
-            = link_to 'ログアウト', destroy_user_session_path, data: { method: 'delete' }
-      - else
-        = link_to 'ログイン', new_user_session_path, class: 'header_loginBtn'
+      .header_btn
+        - if user_signed_in?
+          .dropdown
+            = image_tag current_user.avatar_image, class: "avatar dropbtn"
+            .dropdown-content
+              = link_to 'プロフィール', profile_path
+              = link_to 'ログアウト', destroy_user_session_path, data: { method: 'delete' }
+        - else
+          = link_to '新規登録', new_user_registration_path, class: 'header_sign_in_btn'
+          = link_to 'ログイン', new_user_session_path, class: 'header_log_in_btn'
     - if flash.present?
       .flash
         - flash.each do |key, value|

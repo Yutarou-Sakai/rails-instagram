@@ -8,6 +8,7 @@ RSpec.describe Post, type: :model do
 
     it '投稿を保存できる' do
       expect(post).to be_valid
+      # puts(post.content_images)
     end
   end
 

@@ -5,7 +5,6 @@ RSpec.describe "Posts", type: :request do
   let!(:posts) { create_list(:post, 5, user: user) }
   
   describe "GET /posts" do
-
     it "200ステータスが返ってくる" do
       get posts_path
       expect(response).to have_http_status(200)
@@ -31,6 +30,15 @@ RSpec.describe "Posts", type: :request do
         expect(Post.last.content).to eq(post_params[:content])
 
         # post.rbのpresence: trueを外せば通る
+      end
+    end
+
+    context 'ログインしていない場合' do
+      it 'ログイン画面にリダイレクトする' do
+        post_params = attributes_for(:post)
+        post posts_path({post: post_params})
+  
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

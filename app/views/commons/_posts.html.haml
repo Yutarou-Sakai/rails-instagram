@@ -16,7 +16,7 @@
                 .content_icon 
                     = image_tag 'heart-active.svg', class: "post_icon hidden active-heart", id: "#{post.id}"
                     = image_tag 'heart.svg', class: "post_icon hidden inactive-heart", id: "#{post.id}"
-                    = link_to post_path(post.id) do
+                    = link_to post_path(post.id), class:"comment_link" do
                         = image_tag "comment.svg", class: "content_icon_comment post_icon"
                     = link_to "https://twitter.com/share?url=#{request.url}/&text=これはいいサービスだ！", target: '_blank' do
                         = image_tag "share.svg", class: "content_icon_share post_icon"

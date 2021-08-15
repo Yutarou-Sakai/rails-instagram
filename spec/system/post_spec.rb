@@ -11,4 +11,12 @@ RSpec.describe 'Post', type: :system do
             expect(page).to have_css('.content_body', text: post.content)
         end
     end
+
+    it '投稿の詳細を表示できる' do
+        visit root_path
+
+        post = posts.last
+        first('.comment_link').click
+        expect(page).to have_css('.content_body', text: post.content)
+    end
 end

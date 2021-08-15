@@ -16,7 +16,11 @@
     }
     .comment_content {
         font-size: $font-sm;
-        color: $comment-text-color;
+        color: $white-text-color;
         word-break: break-all;
     }
+}
+
+.show-comment-form {
+    margin-bottom: 30px;
 }

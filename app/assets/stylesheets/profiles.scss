@@ -13,6 +13,9 @@
         div {
             width: 20%;
         }
+        a {
+            color: $white-text-color;
+        }
         &_num {
             font-weight: 600;
             font-size: $font-md;

@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
     before_action :authenticate_user! #ログインしている人限定
-    before_action :set_profile, only: [:edit, :update]
+    before_action :set_profile, only: [:edit]
 
     def show
         @profile = current_user.profile #user.rb に has_one :profile とあるので .profile が使える
@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
         @follower_count = @user.follower_count(@user)
         @following_count = @user.following_count(@user)
 
-        if @posts.presence
+        if @user.posts.presence
             @posts = Post.where(user_id: @profile.user_id).order(created_at: :desc)
         end
     end
@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
     end
 
     def update
+        @profile = current_user.prepare_profile
         #@profileに対してパラメータの値を合体できる
         @profile.assign_attributes(profile_params)
         if @profile.save

@@ -8,7 +8,7 @@ RSpec.describe 'Post', type: :system do
         visit root_path
 
         posts.each do |post|
-            expect(page).to have_content(post.content)
+            expect(page).to have_css('.content_body', text: post.content)
         end
     end
 end

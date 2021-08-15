@@ -10,7 +10,9 @@ class ProfilesController < ApplicationController
         @follower_count = @user.follower_count(@user)
         @following_count = @user.following_count(@user)
 
-        @posts = Post.where(user_id: @profile.user_id).order(created_at: :desc)
+        if @posts.presence
+            @posts = Post.where(user_id: @profile.user_id).order(created_at: :desc)
+        end
     end
 
     def edit

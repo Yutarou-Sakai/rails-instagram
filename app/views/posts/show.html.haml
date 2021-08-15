@@ -25,11 +25,11 @@
     .comment_lists
 
     - if user_signed_in?
-        .btn-secondary.show-comment-form
+        .btn-sick.show-comment-form
             コメントを追加
         .comment-text-area.hidden
             = text_area_tag :comment_content, '', class: 'sm_area'
-            .btn-secondary.add-comment-btn
+            .btn-sick.add-comment-btn
                 コメントを投稿
             .btn-cancel.close-comment-form
                 キャンセル

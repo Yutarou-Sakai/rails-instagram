@@ -14,22 +14,20 @@ RSpec.describe "Posts", type: :request do
 
   describe "POST /posts" do
     context 'ログインしている場合' do
-      # let!(:images) { fixture_file_upload('app/assets/images/test1.jpg', 'image/jpeg') }
-
       before do
         sign_in user
       end
 
       it "投稿が保存される" do
-        # image_params = { content_images: [attributes_for(images)] }
-
         post_params = attributes_for(:post)
+        image = ActiveStorage::Blob.create_after_upload!(
+          io: File.open('app/assets/images/test1.jpg'), filename: 'test1.jpg'
+        ).signed_id
+        post_params[:content_images] = [image]
         post posts_path({post: post_params})
 
         expect(response).to have_http_status(302)
         expect(Post.last.content).to eq(post_params[:content])
-
-        # post.rbのpresence: trueを外せば通る
       end
     end
 

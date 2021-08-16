@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
     def index
         @posts = Post.all.order(created_at: :desc)
-    end 
+    end
 
     def show
         @comments = Comment.where(post_id: @post.id)
@@ -24,7 +24,6 @@ class PostsController < ApplicationController
             render :new
         end
     end
-
 
     private
     def post_params #フォームの入力内容

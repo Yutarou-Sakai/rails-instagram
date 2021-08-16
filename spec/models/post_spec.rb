@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :bigint           not null, primary key
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
@@ -11,7 +29,6 @@ RSpec.describe Post, type: :model do
       # puts(post.content_images)
     end
   end
-
 
   context '画像が5枚以上の場合' do
     let!(:post) { build(:post, user: user) }

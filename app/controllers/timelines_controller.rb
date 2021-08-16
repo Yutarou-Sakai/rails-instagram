@@ -7,7 +7,7 @@ class TimelinesController < ApplicationController
         from  = Time.current.at_beginning_of_day
         to    = (from + 1.day)
 
-        @popular_posts = Post.joins(:likes).group("posts.id").order("count(posts.id) desc").limit(5)
+        @popular_posts = Post.joins(:likes).group('posts.id').order('count(posts.id) desc').limit(5)
 
         @posts = @popular_posts
         # ↓は直近２４時間の投稿から

@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  username               :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -24,8 +43,6 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: :false }, #一意のusernameで大小文字を区別しない
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
-
-  
   # カウント
   def post_count(user)
     posts = user.posts
@@ -58,7 +75,7 @@ class User < ApplicationRecord
     relation = following_relationships.find_by!(following_id: user_id)
     relation.destroy!
   end
-  
+
   def has_followed?(user)
     following_relationships.exists?(following_id: user.id)
   end
@@ -67,7 +84,7 @@ class User < ApplicationRecord
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["username = :value OR lower(email) = lower(:value)", { :value => login }]).first
+      where(conditions).where(['username = :value OR lower(email) = lower(:value)', { :value => login }]).first
     else
       where(conditions).first
     end
@@ -86,7 +103,6 @@ class User < ApplicationRecord
       'no-img-avatar.png'
     end
   end
-
 
   private
   def get_user_id(user)

@@ -33,6 +33,7 @@ gem 'active_model_serializers'
 gem 'pry-byebug'
 gem 'sidekiq'
 gem 'faker'
+gem 'annotate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

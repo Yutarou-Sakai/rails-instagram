@@ -30,7 +30,6 @@ class Post < ApplicationRecord
   validates :content_images, presence: true
   validate :content_image_type, :content_image_size, :content_image_length
 
-
   private
 
   def content_image_type
@@ -46,7 +45,7 @@ class Post < ApplicationRecord
     content_images.each do |content_image|
       if content_image.blob.byte_size > 5.megabytes
         content_image.purge
-        errors.add(:content_images, "は1つのファイル5MB以内にしてください")
+        errors.add(:content_images, 'は1つのファイル5MB以内にしてください')
       end
     end
   end
@@ -54,7 +53,7 @@ class Post < ApplicationRecord
   def content_image_length
     if content_images.length > 4
       content_images = nil
-      errors.add(:content_images, "は4枚以内にしてください")
+      errors.add(:content_images, 'は4枚以内にしてください')
     end
   end
 end

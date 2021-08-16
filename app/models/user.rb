@@ -43,8 +43,6 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: :false }, #一意のusernameで大小文字を区別しない
     length: { minimum: 3, maximum: 20 } #3文字以上20文字以内
 
-
-  
   # カウント
   def post_count(user)
     posts = user.posts
@@ -77,7 +75,7 @@ class User < ApplicationRecord
     relation = following_relationships.find_by!(following_id: user_id)
     relation.destroy!
   end
-  
+
   def has_followed?(user)
     following_relationships.exists?(following_id: user.id)
   end
@@ -86,7 +84,7 @@ class User < ApplicationRecord
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["username = :value OR lower(email) = lower(:value)", { :value => login }]).first
+      where(conditions).where(['username = :value OR lower(email) = lower(:value)', { :value => login }]).first
     else
       where(conditions).first
     end
@@ -105,7 +103,6 @@ class User < ApplicationRecord
       'no-img-avatar.png'
     end
   end
-
 
   private
   def get_user_id(user)

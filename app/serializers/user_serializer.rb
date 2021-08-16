@@ -24,9 +24,9 @@ class UserSerializer < ActiveModel::Serializer
 
   def avatar_image
     if object.avatar_image != 'no-img-avatar.png'
-      rails_blob_path(object.avatar_image, only_path: true) 
+      rails_blob_path(object.avatar_image, only_path: true)
     else
-      "no-img-avatar.png"
+      'no-img-avatar.png'
     end
   end
 end

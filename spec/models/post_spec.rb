@@ -30,7 +30,6 @@ RSpec.describe Post, type: :model do
     end
   end
 
-
   context '画像が5枚以上の場合' do
     let!(:post) { build(:post, user: user) }
 

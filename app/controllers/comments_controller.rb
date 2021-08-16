@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
     before_action :set_post, only: [:index, :create]
     before_action :set_comments, only: [:index, :create]
 
-
     def index
         render json: @comments, include: { user: [:profile] }
     end
@@ -17,10 +16,8 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        
+
     end
-
-
 
     private
     def comment_params

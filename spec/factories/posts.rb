@@ -24,4 +24,4 @@ FactoryBot.define do
             post.content_images.attach(io: File.open('app/assets/images/test1.jpg'), filename: 'test1.jpg')
         end
     end
-end 
+end

@@ -21,7 +21,6 @@ class Profile < ApplicationRecord
 
   validate :avatar_type, :avatar_size
 
-
   private
 
   def avatar_type
@@ -34,7 +33,7 @@ class Profile < ApplicationRecord
   def avatar_size
     if avatar.blob.byte_size > 5.megabytes
       avatar.purge
-      errors.add(:avatar, "は1つのファイル5MB以内にしてください")
+      errors.add(:avatar, 'は1つのファイル5MB以内にしてください')
     end
   end
 end

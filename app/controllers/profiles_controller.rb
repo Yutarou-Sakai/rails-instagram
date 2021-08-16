@@ -30,13 +30,12 @@ class ProfilesController < ApplicationController
         end
     end
 
-
     private
     def profile_params #以下の内容だけ保存を許可
         params.require(:profile).permit(:avatar)
     end
 
-    def set_profile 
+    def set_profile
         @profile = current_user.prepare_profile #prepare_profile -> user.rb
     end
 end
